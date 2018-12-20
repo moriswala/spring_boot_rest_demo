@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Spring Boot Exemple</title>
+    <title>Spring Boot</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <tr>
                 <th>Id</th>
-                <th>Product Id</th>
+                <th>Category Id</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>View</th>
@@ -23,7 +23,7 @@
             </tr>
             <tr th:each="product : ${products}">
                 <td th:text="${product.id}"><a href="/product/${product.id}">Id</a></td>
-                <td th:text="${product.productId}">Product Id</td>
+                <td th:text="${product.categoryId}">Category Id</td>
                 <td th:text="${product.name}">descirption</td>
                 <td th:text="${product.price}">price</td>
                 <td><a th:href="${ '/product/' + product.id}">View</a></td>

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -20,7 +21,8 @@ public class Product {
     @Version
     private Integer version;
 
-    private String productId;
+    @NotNull
+    private Integer categoryId;
     private String name;
     private BigDecimal price;
 
@@ -48,14 +50,6 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -64,4 +58,11 @@ public class Product {
         this.price = price;
     }
 
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 }

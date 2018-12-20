@@ -10,24 +10,18 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <h2>Product Details</h2>
+    <h2>Category Details</h2>
         <div>
             <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Category Id:</label>
                     <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${product.categoryId}">Category Id</p></div>
+                        <p class="form-control-static" th:text="${category.id}">Category Id</p></div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Name:</label>
                     <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${product.name}">name</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Price:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${product.price}">Price</p>
+                        <p class="form-control-static" th:text="${category.name}">name</p>
                     </div>
                 </div>
             </form>

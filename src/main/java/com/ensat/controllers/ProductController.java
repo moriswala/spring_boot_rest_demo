@@ -1,7 +1,10 @@
 package com.ensat.controllers;
 
+import com.ensat.entities.Category;
 import com.ensat.entities.Product;
+import com.ensat.services.CategoryService;
 import com.ensat.services.ProductService;
+import com.ensat.tos.ProductCategoriesTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 /**
  * Product controller.
  */
@@ -18,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProductController {
 
     private ProductService productService;
+    private CategoryService categoryService;
 
     @Autowired
-    public void setProductService(ProductService productService) {
+    public void setProductService(ProductService productService,
+                                  CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     /**
@@ -53,6 +61,8 @@ public class ProductController {
     // Afficher le formulaire de modification du Product
     @RequestMapping("product/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
+        Iterable<Category> categories = categoryService.listAllCategory();
+        model.addAttribute("categories", categories);
         model.addAttribute("product", productService.getProductById(id));
         return "productform";
     }
@@ -65,6 +75,8 @@ public class ProductController {
      */
     @RequestMapping("product/new")
     public String newProduct(Model model) {
+        Iterable<Category> categories = categoryService.listAllCategory();
+        model.addAttribute("categories", categories);
         model.addAttribute("product", new Product());
         return "productform";
     }
@@ -104,8 +116,5 @@ public class ProductController {
         return ResponseEntity.ok()
                 .eTag("All Products")
                 .body(productService.listAllProducts());
-//        model.addAttribute("products", productService.listAllProducts());
-//        System.out.println("Returning rpoducts:");
-//        return "products";
     }
 }
