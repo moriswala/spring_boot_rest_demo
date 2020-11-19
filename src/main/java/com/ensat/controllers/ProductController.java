@@ -6,13 +6,11 @@ import com.ensat.services.CategoryService;
 import com.ensat.services.ProductService;
 import com.ensat.tos.ProductCategoriesTo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -117,4 +115,26 @@ public class ProductController {
                 .eTag("All Products")
                 .body(productService.listAllProducts());
     }
+
+    /**
+     * Inser new product REST API
+     *
+     * @param product
+     * @return
+     */
+    @PostMapping("/rest/v1/product")
+    ResponseEntity newProducts(@RequestBody Product product) {
+        try {
+            productService.saveProduct(product);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .eTag("New Product")
+                    .body("Product inserted");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                    .eTag("New Product")
+                    .body("Product insertion failed");
+        }
+    }
+
 }
